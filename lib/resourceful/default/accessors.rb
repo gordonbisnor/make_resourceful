@@ -183,7 +183,9 @@ module Resourceful
       # of the current object.
       # This is only meaningful for +create+ or +update+.
       def object_parameters
-        params[namespaced_model_name.underscore.tr('/', '_')]
+        params.require(namespaced_model_name.underscore.tr('/', '_')).permit!
+        rescue 
+          nil
       end
 
       # Returns a list of the names of all the potential parents of the current model.
